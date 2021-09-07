@@ -18,8 +18,16 @@ func main() {
 	imgGray := gocv.NewMat()
 	gocv.CvtColor(img, &imgGray, gocv.ColorBGRToGray)
 	// ここまでを保存
-	outPath := "gray.jpeg"
-	if ok := gocv.IMWrite(outPath, imgGray); !ok {
+	grayPath := "gray.jpeg"
+	if ok := gocv.IMWrite(grayPath, imgGray); !ok {
+		fmt.Printf("Failed to write image: %s\n")
+		os.Exit(1)
+	}
+	imgTreshold := gocv.NewMat()
+	gocv.Threshold(imgGray, &imgTreshold, 127, 255, 0)
+	// ここまでを保存
+	outPath := "Threashold.jpeg"
+	if ok := gocv.IMWrite(outPath, imgTreshold); !ok {
 		fmt.Printf("Failed to write image: %s\n")
 		os.Exit(1)
 	}
