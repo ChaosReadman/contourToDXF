@@ -15,14 +15,19 @@ func writeImg(file string, img *gocv.Mat) {
 	}
 }
 
-func main() {
-	// ファイル読み込み
-	imgPath := "PC250001.jpg"
-	img := gocv.IMRead(imgPath, gocv.IMReadColor)
+func readImg(file string) gocv.Mat {
+	img := gocv.IMRead(file, gocv.IMReadColor)
 	if img.Empty() {
-		fmt.Printf("Could not read image %s\n", imgPath)
+		fmt.Printf("Could not read image %s\n", file)
 		os.Exit(1)
 	}
+	return img
+}
+
+func main() {
+	// ファイル読み込み
+	img := readImg("PC250001.jpg")
+
 	// グレースケール作成
 	imgGray := gocv.NewMat()
 	gocv.CvtColor(img, &imgGray, gocv.ColorBGRToGray)
