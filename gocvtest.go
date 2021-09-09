@@ -49,7 +49,7 @@ func DrawContourToDXF(name string, c gocv.PointsVector) {
 
 func main() {
 	// ファイル読み込み
-	img := readImg("PC250001.jpg")
+	img := readImg("210316抜粋.png")
 
 	// グレースケール作成
 	imgGray := gocv.NewMat()
