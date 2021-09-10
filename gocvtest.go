@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image/color"
 	"os"
+	"strings"
 
 	"github.com/yofu/dxf"
 	"gocv.io/x/gocv"
@@ -50,24 +51,21 @@ func DrawContourToDXF(name string, c gocv.PointsVector) {
 func main() {
 
 	//コマンドライン引数準備
-	args := os.Args[1]
-
-	//読み込み画像拡張子準備
-	jpg := ".jpg"
+	input := os.Args[1]
 
 	//出力ファイル名準備
-	gra := "_gray.jpg"
-	thr := "_Threshold.jpg"
-	con := "_Contour.jpg"
-	tes := "_test.dxf"
+	gra := "_G.jpg"
+	thr := "_T.jpg"
+	con := "_C.jpg"
+	tes := ".dxf"
 
-	imgName := args + jpg
-	imgGrayName := args + gra
-	imgTresholdName := args + thr
-	imgContourName := args + con
-	testDxf := args + tes
-
-	fmt.Println(args)
+	imgName := input
+	pos := strings.LastIndexByte(input, '.')
+	filename := input[:pos]
+	imgGrayName := filename + gra
+	imgTresholdName := filename + thr
+	imgContourName := filename + con
+	testDxf := filename + tes
 
 	// ファイル読み込み
 	img := readImg(imgName)
