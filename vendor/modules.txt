@@ -1,0 +1,18 @@
+# github.com/yofu/dxf v0.0.0-20190710012328-5a6d1e83f16c
+## explicit
+github.com/yofu/dxf
+github.com/yofu/dxf/block
+github.com/yofu/dxf/class
+github.com/yofu/dxf/color
+github.com/yofu/dxf/drawing
+github.com/yofu/dxf/entity
+github.com/yofu/dxf/format
+github.com/yofu/dxf/geometry
+github.com/yofu/dxf/handle
+github.com/yofu/dxf/header
+github.com/yofu/dxf/insunit
+github.com/yofu/dxf/object
+github.com/yofu/dxf/table
+# gocv.io/x/gocv v0.28.0
+## explicit
+gocv.io/x/gocv

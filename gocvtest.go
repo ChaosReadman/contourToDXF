@@ -48,27 +48,48 @@ func DrawContourToDXF(name string, c gocv.PointsVector) {
 }
 
 func main() {
+
+	//コマンドライン引数準備
+	args := os.Args[1]
+
+	//読み込み画像拡張子準備
+	jpg := ".jpg"
+
+	//出力ファイル名準備
+	gra := "_gray.jpg"
+	thr := "_Threshold.jpg"
+	con := "_Contour.jpg"
+	tes := "_test.dxf"
+
+	imgName := args + jpg
+	imgGrayName := args + gra
+	imgTresholdName := args + thr
+	imgContourName := args + con
+	testDxf := args + tes
+
+	fmt.Println(args)
+
 	// ファイル読み込み
-	img := readImg("PC250001.jpg")
+	img := readImg(imgName)
 
 	// グレースケール作成
 	imgGray := gocv.NewMat()
 	gocv.CvtColor(img, &imgGray, gocv.ColorBGRToGray)
 	// ここまでを保存
-	writeImg("gray.jpg", &imgGray)
+	writeImg(imgGrayName, &imgGray)
 
 	imgTreshold := gocv.NewMat()
 	gocv.Threshold(imgGray, &imgTreshold, 127, 255, 0)
 	// ここまでを保存
-	writeImg("Threshold.jpg", &imgTreshold)
+	writeImg(imgTresholdName, &imgTreshold)
 
 	// 輪郭を抽出
 	contours := gocv.FindContours(imgTreshold, gocv.RetrievalTree, gocv.ChainApproxSimple)
 	// 元のイメージに書き込む
 	gocv.DrawContours(&img, contours, -1, color.RGBA{255, 0, 0, 0}, 3)
 	// ここまでを保存
-	writeImg("Contour.jpg", &img)
+	writeImg(imgContourName, &img)
 
 	// DXFで出力
-	DrawContourToDXF("test.dxf", contours)
+	DrawContourToDXF(testDxf, contours)
 }
