@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"image/color"
 	"os"
 	"strings"
 
@@ -54,24 +53,24 @@ func main() {
 	input := os.Args[1]
 
 	//出力ファイル名準備
-	gra := "_G.jpg"
-	thr := "_T.jpg"
+	/**gra := "_G.jpg"
 	con := "_C.jpg"
-	tes := ".dxf"
+	tes := ".dxf"*/
+	thr := "_T.jpg"
 
 	imgName := input
 	pos := strings.LastIndexByte(input, '.')
 	filename := input[:pos]
-	imgGrayName := filename + gra
 	imgTresholdName := filename + thr
-	imgContourName := filename + con
-	testDxf := filename + tes
+	/**imgGrayName := filename + gra*/
+	/**imgContourName := filename + con
+	testDxf := filename + tes*/
 
 	// ファイル読み込み
 	img := readImg(imgName)
 
 	// グレースケール作成
-	imgGray := gocv.NewMat()
+	/**imgGray := gocv.NewMat()
 	gocv.CvtColor(img, &imgGray, gocv.ColorBGRToGray)
 	// ここまでを保存
 	writeImg(imgGrayName, &imgGray)
@@ -89,5 +88,10 @@ func main() {
 	writeImg(imgContourName, &img)
 
 	// DXFで出力
-	DrawContourToDXF(testDxf, contours)
+	DrawContourToDXF(testDxf, contours)*/
+
+	//Canny利用
+	imgEdge := gocv.NewMat()
+	gocv.Canny(img, &imgEdge, 200, 400)
+	writeImg(imgTresholdName, &imgEdge)
 }
